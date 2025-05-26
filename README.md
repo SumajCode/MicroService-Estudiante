@@ -14,7 +14,6 @@ cd tu-repo
 # Instalar dependencias (ejemplo para Python)
 pip install -r requirements.txt
 ```
---- 
 
 ## Pasos de ejecucion
 ```bash
@@ -27,3 +26,15 @@ source .venv/bin/activate
 # Ejecuccion
 python main.py
 
+```
+
+## Configuracion de la base de datos
+```bash
+# --------------------------
+# MySQL conexion con (Railway)
+# --------------------------
+MYSQLUSER=root
+MYSQLPASSWORD=
+MYSQLHOST=
+MYSQLPORT=
+MYSQL_DATABASE=
