@@ -27,3 +27,7 @@ jobs:
 
       - name: Listar archivos
         run: ls -la  # Ahora puedes ver los archivos del repo
+      
+        # Ejecutar test
+      - name: Ejecutar tests con pytest
+        run: pytest -v 
