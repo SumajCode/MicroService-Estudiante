@@ -12,3 +12,16 @@ cd tu-repo
 
 # Instalar dependencias (ejemplo para Python)
 pip install -r requirements.txt
+
+
+# Crear un entorno virtual
+python -m venv .venv
+
+# Activar el entorno virtual (Windows)
+.venv\Scripts\activate
+
+# Activar el entorno virtual (Linux/Mac)
+source .venv/bin/activate
+
+# Instalar dependencias
+pip install -r requirements.txt
