@@ -42,6 +42,7 @@ MYSQL_DATABASE=
 ```
 
 ## Estructura del proyecto
+```
 MicroServicioEstudiante/
 ├── venv/                       # Entorno virtual local
 ├── src/                        # Código fuente del microservicio
@@ -63,3 +64,4 @@ MicroServicioEstudiante/
 │   ├── Test/                   # Pruebas unitarias y de integración
 ├── requirements.txt            # Lista de dependencias del proyecto
 └── README.md                   # Documentación del microservicio
+```
