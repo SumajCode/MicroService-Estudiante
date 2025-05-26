@@ -1,6 +1,6 @@
-# Nombre del Proyecto 🚀
+# Microservicio de Estudianes
 
-🔹 **Descripción breve** (1-2 líneas que expliquen qué hace el proyecto).
+🔹 El microservicio de Estudiantes es responsable de la gestión de usuarios tipo estudiante dentro de la plataforma. 
 
 ---
 
