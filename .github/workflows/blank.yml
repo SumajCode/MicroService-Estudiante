@@ -27,7 +27,12 @@ jobs:
 
       - name: Listar archivos
         run: ls -la  # Ahora puedes ver los archivos del repo
-      
+        
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
         # Ejecutar test
       - name: Ejecutar tests con pytest
         run: pytest -v --maxfail=1 --disable-warnings
