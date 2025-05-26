@@ -30,4 +30,4 @@ jobs:
       
         # Ejecutar test
       - name: Ejecutar tests con pytest
-        run: pytest -v 
+        run: pytest -v --maxfail=1 --disable-warnings
