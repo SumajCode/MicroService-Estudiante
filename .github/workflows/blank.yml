@@ -21,11 +21,11 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      MYSQLUSER: sql5781310
-      MYSQLPASSWORD: GQAZvyfpAQ
-      MYSQLHOST: sql5.freesqldatabase.com
-      MYSQLPORT: 3306
-      MYSQL_DATABASE: sql5781310
+      MYSQLUSER: ${{ secrets.MYSQLUSER }}
+      MYSQLPASSWORD: ${{ secrets.MYSQLPASSWORD }}
+      MYSQLHOST: ${{ secrets.MYSQLHOST }}	
+      MYSQLPORT: ${{ secrets.MYSQLPORT }}	
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}	
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
