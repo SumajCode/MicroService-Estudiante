@@ -20,6 +20,13 @@ jobs:
     # Se ejecuta en ubuntu, crea una instancia de ubuntu y se ejecuta el script
     runs-on: ubuntu-latest
 
+    env:
+      MYSQLUSER: sql5781310
+      MYSQLPASSWORD: GQAZvyfpAQ
+      MYSQLHOST: sql5.freesqldatabase.com
+      MYSQLPORT: 3306
+      MYSQL_DATABASE: sql5781310
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Clona el repositorio del microservicio api-estudiante 
@@ -27,7 +34,7 @@ jobs:
 
       - name: Listar archivos
         run: ls -la  # Ahora puedes ver los archivos del repo
-        
+
       - name: Instalar dependencias
         run: |
           python -m pip install --upgrade pip
