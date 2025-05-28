@@ -1,19 +1,21 @@
 from flask import request, jsonify
 from ..Models.EstudianteModels import db, Estudiantes
 from datetime import datetime
-
+from .Errors import ErrorClient as errorCliente
 
 # Obtener todos los estudiantes
 def getEstudiantes():
     estudiantes = Estudiantes.query.all()
-    return jsonify([s.to_dict() for s in estudiantes])
+    if estudiantes is None:
+        raise errorCliente.NotFoundError(description="No existen estudiantes registrados")
+    return jsonify([s.to_dict() for s in estudiantes]), 200
 
 # Obtener un solo estudiante por ID
 def getEstudiante(id):
     estudiante = Estudiantes.query.get(id)
-    if not estudiante:
-        return jsonify({"message": "Estudiante no encontrado"}), 404
-    return jsonify(estudiante.to_dict())
+    if estudiante is None:
+        raise errorCliente.NotFoundError(description="Estudiante no encontrado")
+    return jsonify(estudiante.to_dict()), 200
 
 # Crear estudiante
 def crearEstudiante():
@@ -23,7 +25,7 @@ def crearEstudiante():
                        "fecha_nacimiento", "numero_celular", "id_pais", "id_ciudad"]
 
     if not all(field in data for field in required_fields):
-        return jsonify({"message": "Faltan campos obligatorios"}), 400
+        raise errorCliente.BadRequest(description="Faltan campos obligatorios")
 
     estudiante = Estudiantes(
         nombre_estudiante = data["nombre_estudiante"],
@@ -39,13 +41,14 @@ def crearEstudiante():
 
     db.session.add(estudiante)
     db.session.commit()
-    return jsonify(estudiante.to_dict()), 201
-
+    return jsonify({"status": 201,
+                    "message": "Estudiante creado exitosamente", 
+                    "data": estudiante.to_dict()}), 201
 # Actualizar estudiante
 def actulizarEstudiante(id_estudiante):
     estudiante = Estudiantes.query.get(id_estudiante)
     if not estudiante:
-        return jsonify({"message": "Estudiante no encontrado"}), 404
+        raise errorCliente.NotFoundError(description = "Estudiante no encontrado")
 
     data = request.get_json()
 
@@ -60,15 +63,18 @@ def actulizarEstudiante(id_estudiante):
     estudiante.id_ciudad = data.get("id_ciudad", estudiante.id_ciudad)
 
     db.session.commit()
-    return jsonify(estudiante.to_dict())
+    return jsonify({"status": 200, 
+                    "message": "Estudiante actualizado correctamente",
+                    "data": estudiante.to_dict()}), 200
 
 
 # Eliminar un estudiante
 def eleminarEstudiante(id):
     estudiante = Estudiantes.query.get(id)
     if not estudiante:
-        return jsonify({"message": "Estudiante no encontrado"}), 404
+        raise errorCliente.NotFoundError(description = "Estudiante no encontrado")
 
     db.session.delete(estudiante)
     db.session.commit()
-    return jsonify({"message": "Estudiante eliminado correctamente"})
+    return jsonify({"status": 200,
+                    "message": "Estudiante eliminado correctamente"}),200

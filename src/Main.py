@@ -1,8 +1,8 @@
-from flask import Flask
-from flask import request, jsonify
+from flask import Flask, jsonify
 from Config.Config import Config
 from Infra.Models.EstudianteModels import db 
 from Infra.Routes.EstudianteRoutes import estudiante  
+from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -22,6 +22,15 @@ def not_found_error(error):
         "status": 404,
         "message": "La ruta solicitada no existe. Verifica la URL y el método."
     }), 404
+
+
+@app.errorhandler(HTTPException)
+def handle_http_exception(e):
+    return jsonify({
+        "status": e.code,
+        "message": e.description
+    }), e.code
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,33 +1,34 @@
 import pytest
 import sys
 import os
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 
-from Main import app 
+from Main import app
+
+ultimo_estudiante_id = None
 
 @pytest.fixture
 def cliente():
     with app.test_client() as cliente:
         yield cliente
 
-
-# Obtener todos los estudiantes
 def test_getEstudiantes(cliente):
     respuesta = cliente.get("/api/estudiantes/")
     assert respuesta.status_code == 200
     assert isinstance(respuesta.json, list)
 
-# Obtener un estudiante por ID (si existe)
 def test_getEstudianteID(cliente):
-    respuesta = cliente.get("/api/estudiantes/1")
+    respuesta = cliente.get("/api/estudiantes/2")
     if respuesta.status_code == 404:
         assert respuesta.json["message"] == "Estudiante no encontrado"
     else:
         assert respuesta.status_code == 200
         assert "nombre_estudiante" in respuesta.json
 
-# Crear un estudiante y guardar el ID para las siguientes pruebas
 def test_crearEstudiante(cliente):
+    global ultimo_estudiante_id
+
     datos = {
         "nombre_estudiante": "Pedro Eliminar",
         "apellido_estudiante": "López",
@@ -40,34 +41,35 @@ def test_crearEstudiante(cliente):
     }
     respuesta = cliente.post("/api/estudiantes/registrar", json=datos)
     assert respuesta.status_code == 201
-    json = respuesta.json
-    assert json["correo_estudiante"] == datos["correo_estudiante"]
+    assert respuesta.json["status"] == 201
+    assert respuesta.json["message"] == "Estudiante creado exitosamente"
+    assert respuesta.json["data"]["correo_estudiante"] == datos["correo_estudiante"]
 
-    # Guardar el ID para usar en las siguientes pruebas
-    global ultimo_estudiante_id
-    ultimo_estudiante_id = json["id_estudiante"]  # Ajusta al nombre correcto de tu campo ID
+    ultimo_estudiante_id = respuesta.json["data"]["id_estudiante"]
 
-
-# Actualizar el último estudiante creado
 def test_actualizarEstudiante(cliente):
-    datos_actualizados = {
+    global ultimo_estudiante_id
+
+    datosActualizados = {
         "nombre_estudiante": "Pedro Actualizado"
     }
 
-    respuesta = cliente.put(f"/api/estudiantes/actualizar/{ultimo_estudiante_id}", json=datos_actualizados)
+    respuesta = cliente.put(f"/api/estudiantes/actualizar/{ultimo_estudiante_id}", json=datosActualizados)
     if respuesta.status_code == 404:
         assert respuesta.json["message"] == "Estudiante no encontrado"
     else:
-        assert respuesta.status_code == 200
-        assert respuesta.json["nombre_estudiante"] == "Pedro Actualizado"
+        assert respuesta.json["status"] == 200
+        assert respuesta.json["data"]["nombre_estudiante"] == "Pedro Actualizado"
+        assert respuesta.json["message"] == "Estudiante actualizado correctamente"
 
-
-# Eliminar el último estudiante creado
 def test_eliminarEstudiante(cliente):
+    global ultimo_estudiante_id
+
     respuesta = cliente.delete(f"/api/estudiantes/eleminar/{ultimo_estudiante_id}")
     assert respuesta.status_code in [200, 404]
     if respuesta.status_code == 200:
+        assert respuesta.json["status"] == 200
         assert respuesta.json["message"] == "Estudiante eliminado correctamente"
     else:
+        assert respuesta.json["status"] == 404
         assert respuesta.json["message"] == "Estudiante no encontrado"
-
