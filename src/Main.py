@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from Config.Config import Config
+from .Config.Config import Config
 from Infra.Models.EstudianteModels import db 
 from Infra.Routes.EstudianteRoutes import estudiante  
 from werkzeug.exceptions import HTTPException
