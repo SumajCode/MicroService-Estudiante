@@ -5,5 +5,5 @@ from Infra.Controllers import DocenteRegisterController
 registrarEstudiantesDocente = Blueprint('registrorEstudiantesDocente', __name__)
 
 @registrarEstudiantesDocente.route("/", methods=["POST"])
-def registrarEstudiantesDocente():
+def registrarEstudiantesDocentes():
     return DocenteRegisterController.registrarEstudiantesDocente()
