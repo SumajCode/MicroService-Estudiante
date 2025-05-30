@@ -21,3 +21,7 @@ class Config:
         f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # 2. Configuración del Email
+    EMAIL_REMITENTE = os.getenv("EMAIL_REMITENTE")
+    EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")

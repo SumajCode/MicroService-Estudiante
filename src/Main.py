@@ -12,7 +12,7 @@ db.init_app(app)
 # Registramos el Blueprint que contiene las rutas de estudiantes
 app.register_blueprint(estudiante, url_prefix="/api/estudiantes")
 app.register_blueprint(login, url_prefix="/api/login")
-app.register_blueprint(registrarEstudiantesDocente, url_prefix="/api/registrarEstudiantesDocente")
+app.register_blueprint(registrarEstudiantesDocente, url_prefix="/api/crearCuentaEstudiante")
 
 # Ruta principal o por defecto
 @app.route('/')

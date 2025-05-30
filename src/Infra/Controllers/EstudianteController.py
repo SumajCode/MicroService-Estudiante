@@ -55,6 +55,7 @@ def crearEstudiante():
         fecha_nacimiento = datetime.strptime(data["fecha_nacimiento"], "%d-%m-%Y"),
         fecha_registro = datetime.now(),
         numero_celular = data["numero_celular"],
+        es_universitario = validarDominioInstitucional(data["correo_estudiante"]),
         id_pais = data["id_pais"],
         id_ciudad = data["id_ciudad"]
     )
@@ -71,6 +72,10 @@ def crearEstudiante():
     return jsonify({"status": 201,
                     "message": "Estudiante creado exitosamente", 
                     "data": estudiante.to_dict()}), 201
+
+def validarDominioInstitucional(correo):
+    dominiosValidos = ["est.umss.edu", "umss.edu.bo"]
+    return any(correo.lower().endswith(f"@{dominio}") for dominio in dominiosValidos)
 
 # Actualizar estudiante perfil
 def actulizarEstudiante(idEstudiante):
