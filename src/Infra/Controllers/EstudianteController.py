@@ -1,4 +1,6 @@
 from flask import request, jsonify
+from ..Utils.ValidadorCorreosUtils import validarDominioInstitucional
+from ..Utils.GenerarContraseniaUtils import filtrarContrasenia
 from ..Models.EstudianteModels import db, Estudiantes
 from datetime import datetime
 from .Errors import ErrorClient as errorCliente
@@ -31,10 +33,6 @@ def getEstudiante(id):
     except: 
         raise errorServer.serverError(description="Error al obtener el estudiante")
     
-def filtrarContrasenia(estudianteDict):
-    estudianteDict.pop('contrasenia', None)
-    return estudianteDict
-
 # Crear estudiante
 def crearEstudiante():
     data = request.get_json()
@@ -69,13 +67,10 @@ def crearEstudiante():
             raise errorCliente.BadRequest(description="Ya existe un estudiante con ese correo electrónico.")
         else:
             raise errorCliente.BadRequest(description=f"Error en la base de datos: {mensaje_bd}")
+    estudianteFiltrado = filtrarContrasenia(estudiante.to_dict())
     return jsonify({"status": 201,
                     "message": "Estudiante creado exitosamente", 
-                    "data": estudiante.to_dict()}), 201
-
-def validarDominioInstitucional(correo):
-    dominiosValidos = ["est.umss.edu", "umss.edu.bo"]
-    return any(correo.lower().endswith(f"@{dominio}") for dominio in dominiosValidos)
+                    "data": estudianteFiltrado}), 201
 
 # Actualizar estudiante perfil
 def actulizarEstudiante(idEstudiante):

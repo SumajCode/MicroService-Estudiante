@@ -22,6 +22,6 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # 2. Configuración del Email
+    # Configuración del correo con gmail
     EMAIL_REMITENTE = os.getenv("EMAIL_REMITENTE")
     EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")

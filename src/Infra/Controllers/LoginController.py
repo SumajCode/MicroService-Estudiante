@@ -15,7 +15,7 @@ def loginEstudiante():
 
         estudiante = Estudiantes.query.filter_by(correo_estudiante=email).first()
         if not estudiante:
-            raise errorCliente.InvalidUser(description="Credenciales inválidassss")
+            raise errorCliente.InvalidUser(description="Credenciales inválidas")
         if not bcrypt.checkpw(password.encode('utf-8'), estudiante.contrasenia.encode('utf-8')):
             raise errorCliente.InvalidUser(description="Credenciales inválidas")
 
