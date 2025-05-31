@@ -2,6 +2,8 @@ from flask import Flask, jsonify
 from Config.Config import Config
 from Infra.Models.EstudianteModels import db 
 from Infra.Routes.EstudianteRoutes import estudiante  
+from Infra.Routes.LoginRoutes import login
+from Infra.Routes.RegisterLoteRoute import registrarLote
 from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
@@ -9,7 +11,8 @@ app.config.from_object(Config)
 db.init_app(app)
 # Registramos el Blueprint que contiene las rutas de estudiantes
 app.register_blueprint(estudiante, url_prefix="/api/estudiantes")
-
+app.register_blueprint(login, url_prefix="/api/login")
+app.register_blueprint(registrarLote, url_prefix="/api/registrarLoteEstudiantes")
 
 # Ruta principal o por defecto
 @app.route('/')

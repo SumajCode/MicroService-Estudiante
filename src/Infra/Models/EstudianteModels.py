@@ -16,6 +16,7 @@ class Estudiantes(db.Model):
     fecha_nacimiento = db.Column(db.Date, nullable=False)
     numero_celular = db.Column(db.String(100), nullable=False)
     fecha_ultimo_acceso = db.Column(db.DateTime)
+    es_universitario = db.Column(db.Boolean, nullable=False, default=False)
     id_pais = db.Column(db.Integer, nullable=False)
     id_ciudad = db.Column(db.Integer, nullable=False)
 
@@ -31,6 +32,7 @@ class Estudiantes(db.Model):
                 "fecha_nacimiento": self.fecha_nacimiento, 
                 "numero_celular": self.numero_celular,
                 "fecha_ultimo_acceso": self.fecha_ultimo_acceso, 
+                "es_universitario": self.es_universitario,
                 "id_pais": self.id_pais, 
                 "id_ciudad": self.id_ciudad}  
         
