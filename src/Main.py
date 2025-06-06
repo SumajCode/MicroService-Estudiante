@@ -4,6 +4,7 @@ from Infra.Models.EstudianteModels import db
 from Infra.Routes.EstudianteRoutes import estudiante  
 from Infra.Routes.LoginRoutes import login
 from Infra.Routes.RegisterLoteRoute import registrarLote
+from Infra.Routes.PaisCiudadRoutes import paisCiudad
 from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
@@ -13,6 +14,7 @@ db.init_app(app)
 app.register_blueprint(estudiante, url_prefix="/api/estudiantes")
 app.register_blueprint(login, url_prefix="/api/login")
 app.register_blueprint(registrarLote, url_prefix="/api/registrarLoteEstudiantes")
+app.register_blueprint(paisCiudad, url_prefix="/api/")
 
 # Ruta principal o por defecto
 @app.route('/')
