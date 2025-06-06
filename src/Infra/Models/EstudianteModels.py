@@ -36,4 +36,29 @@ class Estudiantes(db.Model):
                 "id_pais": self.id_pais, 
                 "id_ciudad": self.id_ciudad}  
         
-        
+class Pais(db.Model):
+    __tablename__ = 'paises'
+    id_pais = db.Column(db.Integer, primary_key=True)
+    nombre_pais = db.Column(db.String(100), nullable=False)
+    codigo_telefono = db.Column(db.String(100), nullable=False)
+
+    def to_dict(self):
+        return {
+            "id_pais": self.id_pais,
+            "nombre_pais": self.nombre_pais,
+            "codigo_telefono": self.codigo_telefono
+        }
+
+class Ciudad(db.Model):
+    __tablename__ = 'ciudades'
+    id_ciudad = db.Column(db.Integer, primary_key=True)
+    nombre_ciudad = db.Column(db.String(100), nullable=False)
+    id_pais = db.Column(db.Integer, db.ForeignKey('paises.id'), nullable=False)   
+    id_pais = db.Column(db.Integer, db.ForeignKey('paises.id'), nullable=False)
+
+    def to_dict(self):
+        return {
+            "id_ciudad": self.id_ciudad,
+            "nombre_ciudad": self.nombre_ciudad,
+            "id_pais": self.id_pais
+        }
