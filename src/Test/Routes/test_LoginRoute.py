@@ -13,7 +13,7 @@ def cliente():
 
 def test_loginExitoso(cliente):
     datos = { "correo_estudiante": "juanPerez@gmail.com",
-              "contrasenia": "abc123"
+              "contrasenia":"abcdefghij"
             }
     response = cliente.post("/api/login/", json=datos)
     assert response.json["status"] == 200
@@ -29,7 +29,7 @@ def test_loginContatraseniaInvalida(cliente):
 
 def test_loginCorreoInvalido(cliente):
     datos = {"correo_estudiante": "noexiste@example.com", 
-             "contrasenia": "123456"
+             "contrasenia": "abcdefghij"
             }
     response = cliente.post("/api/login/", json=datos)
     assert response.json["status"] == 401
@@ -40,5 +40,46 @@ def test_loginCamposFaltantes(cliente):
     assert response.json["status"] == 400
     assert response.json["message"] == "Correo y contraseña son obligatorios"
     
+def test_cambiarContraseniaExitoso(cliente):
+    datos = { "correo_estudiante": "juanPerez@gmail.com",
+              "contrasenia_actual": "abcdefghij",
+              "nueva_contrasenia": "abcdefghij"
+            }
+    response = cliente.put("/api/login/cambiarContrasenia", json=datos)
+    assert response.json["status"] == 200
+    assert response.json["message"] == "Contraseña cambiada exitosamente"
 
+def test_cambiarContraseniaConContraseniaInvalida(cliente):
+    datos = { "correo_estudiante": "juanPerez@gmail.com",
+              "contrasenia_actual": "abcdefghijs",
+              "nueva_contrasenia": "abcdefghij"
+            }
+    response = cliente.put("/api/login/cambiarContrasenia", json=datos)
+    assert response.json["status"] == 401
+    assert response.json["message"] == "La contraseña actual es incorrecta"
+
+def test_cambiarContraseniaConNuevaContraseniaInvalida(cliente):
+    datos = { "correo_estudiante": "juanPerez@gmail.com",
+              "contrasenia_actual": "abcdefghij",
+              "nueva_contrasenia": "abcde"
+            }
+    response = cliente.put("/api/login/cambiarContrasenia", json=datos)
+    assert response.json["status"] == 400
+    assert response.json["message"] == "La nueva contraseña debe tener al menos 8 caracteres"
+
+def test_cambiarContraseniaEstudianteNoEncontrado(cliente):
+    datos = { "correo_estudiante": "juanPerezA@gmail.com",
+              "contrasenia_actual": "abcdefghij",
+              "nueva_contrasenia": "abcdefghij"
+            }
     
+    response = cliente.put("/api/login/cambiarContrasenia", json=datos)
+    assert response.json["status"] == 404
+    assert response.json["message"] == "Estudiante no encontrado"
+
+def test_cambiarContraseniaEviarContraseniaNuevaActual(cliente):
+    datos = { "correo_estudiante": "juanPerezA@gmail.com"}
+    
+    response = cliente.put("/api/login/cambiarContrasenia", json=datos)
+    assert response.json["status"] == 400
+    assert response.json["message"] == "Debe enviar la contraseña actual y la nueva contraseña"
