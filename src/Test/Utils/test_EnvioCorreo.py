@@ -15,7 +15,7 @@ def cliente():
 
 def test_enviarCorreoEstudianteExitoso():
     with app.app_context():
-        response = enviarCorreoEstudiante("201705944@est.umss.edu", "clave123")
+        response = enviarCorreoEstudiante("201705944@est.umss.edu", "AsdRdsF1")
         assert response.status_code == 200
         json_data = response.get_json()
         assert json_data["message"] == "Correo enviado exitosamente"
