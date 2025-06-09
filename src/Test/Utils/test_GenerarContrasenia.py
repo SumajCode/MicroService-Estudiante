@@ -23,11 +23,11 @@ def test_generarContraseniaPersonalizada():
 
 def test_filtrarContrasenia():
     datos = {
-        'nombre': 'Juan',
-        'contrasenia': 'secreta123',
-        'correo': 'juan@mail.com'
+        "nombre": "Juan",
+        "contrasenia": "secreta123",
+        "correo": "juan@mail.com"
     }
     resultado = filtrarContrasenia(datos.copy())
-    assert 'contrasenia' not in resultado
-    assert resultado['nombre'] == 'Juan'
-    assert resultado['correo'] == 'juan@mail.com'
+    assert "contrasenia" not in resultado
+    assert resultado["nombre"] == "Juan"
+    assert resultado["correo"] == "juan@mail.com"

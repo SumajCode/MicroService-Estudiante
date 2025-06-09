@@ -14,7 +14,7 @@ def getEstudiantes():
     if not estudiantes:
         raise errorCliente.NotFoundError(description="No existen estudiantes registrados")
     try:
-        return jsonify({"status": 200,
+        return jsonify({"status": 200, 
                         "message": "Lista de estudiantes",
                         "data": [filtrarContrasenia(s.to_dict()) for s in estudiantes]}), 200
     except Exception as e:
