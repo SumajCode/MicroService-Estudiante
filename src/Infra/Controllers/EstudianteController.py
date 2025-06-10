@@ -104,4 +104,4 @@ def eleminarEstudiante(id):
         return jsonify({"status": 200,
                         "message": "Estudiante eliminado correctamente"}),200
     except Exception as e:
-        raise errorServer.serverError(description=str(e))
+        raise errorServer.serverError(description=str(e)) 
