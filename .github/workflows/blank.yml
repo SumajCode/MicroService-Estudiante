@@ -26,7 +26,9 @@ jobs:
       MYSQLHOST: ${{ secrets.MYSQLHOST }}	
       MYSQLPORT: ${{ secrets.MYSQLPORT }}	
       MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}	
-
+      EMAIL_REMITENTE: ${{ secrets.EMAIL_REMITENTE }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      
     # Secuencia de pasos que se van a ejecutar en el microservicio 
     steps:
       # Clona el repositorio del microservicio api-estudiante 
