@@ -16,15 +16,26 @@ def cliente():
 def test_getEstudiantes(cliente):
     respuesta = cliente.get("/api/estudiantes/")
     assert respuesta.status_code == 200
-    assert isinstance(respuesta.json, list)
+    assert isinstance(respuesta.json, dict)
+    assert "status" in respuesta.json
+    assert "message" in respuesta.json
+    assert "data" in respuesta.json
+
+    assert respuesta.json["status"] == 200
+    assert respuesta.json["message"] == "Lista de estudiantes"
+    assert isinstance(respuesta.json["data"], list)
 
 def test_getEstudianteID(cliente):
     respuesta = cliente.get("/api/estudiantes/2")
+    
     if respuesta.status_code == 404:
         assert respuesta.json["message"] == "Estudiante no encontrado"
     else:
         assert respuesta.status_code == 200
-        assert "nombre_estudiante" in respuesta.json
+        assert "data" in respuesta.json
+        assert respuesta.json["message"] == "Informacion del estudiante"
+        assert "nombre_estudiante" in respuesta.json["data"]
+        assert isinstance(respuesta.json["data"], dict)
 
 def test_crearEstudiante(cliente):
     global ultimo_estudiante_id
@@ -34,11 +45,12 @@ def test_crearEstudiante(cliente):
         "apellido_estudiante": "López",
         "correo_estudiante": "pedros@example.com",
         "contrasenia": "123456",
-        "fecha_nacimiento": "2000-01-01",
+        "fecha_nacimiento": "01-01-2000",
         "numero_celular": "78945612",
         "id_pais": 1,
         "id_ciudad": 1
     }
+
     respuesta = cliente.post("/api/estudiantes/registrar", json=datos)
     assert respuesta.status_code == 201
     assert respuesta.json["status"] == 201

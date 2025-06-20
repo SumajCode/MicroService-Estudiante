@@ -66,8 +66,10 @@ def registrarEstudiantes(lista_estudiantes):
             resultados.append({
                 "correo_estudiante": data["correo_estudiante"],
                 "status": 400,
+                "data": filtrarContrasenia(estudiante.to_dict()) if estudiante else None,
                 "message": "Ya existe un usuario con ese correo." if "unique constraint" in mensaje_bd.lower() or "duplicate" in mensaje_bd.lower()
                            else f"Error en la base de datos: {mensaje_bd}"
+
             })
         except Exception as e:
             db.session.rollback()
