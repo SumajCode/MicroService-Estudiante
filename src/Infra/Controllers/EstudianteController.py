@@ -64,7 +64,14 @@ def crearEstudiante():
         db.session.rollback()
         mensaje_bd = str(e.orig)  # Mensaje original de la base de datos
         if "unique constraint" in mensaje_bd.lower() or "duplicate" in mensaje_bd.lower():
-            raise errorCliente.BadRequest(description="Ya existe un estudiante con ese correo electrónico.")
+            estudiante_existente = Estudiantes.query.filter_by(
+                correo_estudiante=data["correo_estudiante"]
+            ).first()
+            estudiante_filtrado = filtrarContrasenia(estudiante_existente.to_dict())
+
+            return jsonify({"status": 400,
+                     "message": "Ya existe un estudiante con ese correo electrónico.",
+                     "data": estudiante_filtrado}),400
         else:
             raise errorCliente.BadRequest(description=f"Error en la base de datos: {mensaje_bd}")
     estudianteFiltrado = filtrarContrasenia(estudiante.to_dict())

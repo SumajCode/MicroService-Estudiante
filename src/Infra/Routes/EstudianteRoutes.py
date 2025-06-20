@@ -21,9 +21,9 @@ def getEstudiante(id):
 def crearEstudiante():
     return EstudianteController.crearEstudiante()
 
-@estudiante.route("/registrarLista", methods=["POST"])
-def crearEstudianteLista():
-    return EstudianteController.crearEstudianteLista()
+#estudiante.route("/registrarLista", methods=["POST"])
+#def crearEstudianteLista():
+#    return EstudianteController.crearEstudianteLista()
 
 @estudiante.route("/actualizar/<int:id_estudiante>", methods=["PUT"])
 def actulizarEstudiante(id_estudiante):
