@@ -63,14 +63,22 @@ def registrarEstudiantes(lista_estudiantes):
         except IntegrityError as e:
             db.session.rollback()
             mensaje_bd = str(e.orig)
-            resultados.append({
-                "correo_estudiante": data["correo_estudiante"],
-                "status": 400,
-                "data": filtrarContrasenia(estudiante.to_dict()) if estudiante else None,
-                "message": "Ya existe un usuario con ese correo." if "unique constraint" in mensaje_bd.lower() or "duplicate" in mensaje_bd.lower()
-                           else f"Error en la base de datos: {mensaje_bd}"
+            
+            if "unique constraint" in mensaje_bd.lower() or "duplicate" in mensaje_bd.lower():
+                estudiante_existente = Estudiantes.query.filter_by(
+                    correo_estudiante=data["correo_estudiante"]
+                ).first()
+                estudiante_filtrado = filtrarContrasenia(estudiante_existente.to_dict())
 
-            })
+                resultados.append({
+                        "correo_estudiante": data["correo_estudiante"],
+                        "status": 400,
+                        "message": "Ya existe un estudiante con ese correo electrónico.",
+                        "data": estudiante_filtrado
+                    })
+            else:
+                raise errorCliente.BadRequest(description=f"Error en la base de datos: {mensaje_bd}")
+   
         except Exception as e:
             db.session.rollback()
             resultados.append({
