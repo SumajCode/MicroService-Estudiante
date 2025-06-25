@@ -63,11 +63,11 @@ def enviarCorreoEstudiante(correoEstudiante, contrasenia):
 </head>
 <body>
     <div class="header">
-        <h2>PythonLab - Plataforma de Aprendizaje</h2>
+        <h2>SumajCode - Plataforma de Aprendizaje</h2>
     </div>
     
     <div class="content">
-        <p>¡Bienvenido/a a <strong>PythonLab</strong>! Estamos encantados de tenerte como parte de nuestra comunidad de aprendizaje.</p>
+        <p>¡Bienvenido/a a <strong>SumajCode</strong>! Estamos encantados de tenerte como parte de nuestra comunidad de aprendizaje.</p>
         
         <div class="credentials">
             <h3>Credenciales de acceso</h3>
@@ -84,13 +84,13 @@ def enviarCorreoEstudiante(correoEstudiante, contrasenia):
         
         <div class="footer">
             <p>Este correo fue generado automáticamente. Por favor no respondas a este mensaje.</p>
-            <p>© 2025 PythonLab. Todos los derechos reservados.</p>
+            <p>© 2025 SumajCode. Todos los derechos reservados.</p>
         </div>
     </div>
 </body>
 </html>
 """
-    if enviarCorreo(destinatario, "Creacion de cuenta en PythonLab", mensaje_html):
+    if enviarCorreo(destinatario, "Creacion de cuenta en SumajCode", mensaje_html):
         return jsonify({"status": 200, "message": "Correo enviado exitosamente"})
     else:
         raise errorServer.serverError(description="Error al enviar el correo")

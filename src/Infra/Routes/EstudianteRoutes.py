@@ -29,7 +29,7 @@ def crearEstudiante():
 def actulizarEstudiante(id_estudiante):
     return EstudianteController.actulizarEstudiante(id_estudiante)
 
-@estudiante.route("/eleminar/<int:id>", methods=["DELETE"])
+@estudiante.route("/eliminar/<int:id>", methods=["DELETE"])
 def eleminarEstudiante(id):
     return EstudianteController.eleminarEstudiante(id)
 
