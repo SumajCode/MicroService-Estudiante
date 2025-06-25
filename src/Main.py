@@ -9,14 +9,21 @@ from werkzeug.exceptions import HTTPException
 from flask_cors import CORS  
 
 app = Flask(__name__)
-CORS(app, resources={
-    r"/api/*": {
-        "origins": ["https://microservice-estudiante.onrender.com", "http://localhost:3000"],
-        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"],
-        "supports_credentials": True
-    }
-})
+CORS(app,origins=
+     ["https://microservice-estudiante.onrender.com"]
+        
+    ,methods=[
+        'GET',
+        'POST',
+        'PUT',
+        'DELETE'
+    ],
+    supports_credentials=True,
+    allow_headers=[
+        'Content-Type',
+        'Authorization'
+    ])
+
 app.config.from_object(Config)
 db.init_app(app)
 # Registramos el Blueprint que contiene las rutas de estudiantes
