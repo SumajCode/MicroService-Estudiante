@@ -7,10 +7,12 @@ from Infra.Routes.LoginRoutes import login
 from Infra.Routes.RegisterLoteRoute import registrarLote
 from Infra.Routes.PaisCiudadRoutes import paisCiudad
 from werkzeug.exceptions import HTTPException
+from flask_talisman import Talisman 
 
 app = Flask(__name__)
 
 # Configura CORS
+Talisman(app, content_security_policy=None)  # Desactiva CSP estricta por defecto
 CORS(app) 
 app.config.from_object(Config)
 db.init_app(app)
