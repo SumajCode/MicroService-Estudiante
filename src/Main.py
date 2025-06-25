@@ -7,28 +7,13 @@ from Infra.Routes.RegisterLoteRoute import registrarLote
 from Infra.Routes.PaisCiudadRoutes import paisCiudad
 from werkzeug.exceptions import HTTPException
 from flask_cors import CORS  
-import logging
 
 app = Flask(__name__)
-logging.basicConfig(level=logging.DEBUG)
+
 
 # Configuración CORS para orígenes permitidos
-CORS(app, resources={
-    r"/api/*": {
-        "origins": [
-            "http://localhost:3000",
-            "https://microservice-estudiante.onrender.com",
-            "https://front-loginv1.vercel.app"
-        ],
-        "supports_credentials": True,
-        "allow_headers": [
-            "Content-Type",
-            "Authorization",
-            "X-Requested-With"
-        ],
-        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-    }
-})
+CORS(app, resources={r"/api/*": { "origins":"https://front-loginv1.vercel.app"}})
+
 
 app.config.from_object(Config)
 db.init_app(app)
