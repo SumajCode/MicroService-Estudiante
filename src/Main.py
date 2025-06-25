@@ -7,14 +7,27 @@ from Infra.Routes.RegisterLoteRoute import registrarLote
 from Infra.Routes.PaisCiudadRoutes import paisCiudad
 from werkzeug.exceptions import HTTPException
 from flask_cors import CORS  
+import logging
 
 app = Flask(__name__)
-CORS(app, origins=[
-    "https://microservice-estudiante.onrender.com",
-    "http://localhost:3000" 
-], methods=['GET', 'POST', 'PUT', 'DELETE'], 
-   supports_credentials=True,
-   allow_headers=['Content-Type', 'Authorization', 'X-Requested-With'])
+logging.basicConfig(level=logging.DEBUG)
+
+# Configuración CORS para orígenes permitidos
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "http://localhost:3000",
+            "https://microservice-estudiante.onrender.com",
+        ],
+        "supports_credentials": True,
+        "allow_headers": [
+            "Content-Type",
+            "Authorization",
+            "X-Requested-With"
+        ],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    }
+})
 
 app.config.from_object(Config)
 db.init_app(app)
