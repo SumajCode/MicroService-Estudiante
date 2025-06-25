@@ -77,7 +77,7 @@ def test_actualizarEstudiante(cliente):
 def test_eliminarEstudiante(cliente):
     global ultimo_estudiante_id
 
-    respuesta = cliente.delete(f"/api/estudiantes/eleminar/{ultimo_estudiante_id}")
+    respuesta = cliente.delete(f"/api/estudiantes/eliminar/{ultimo_estudiante_id}")
     assert respuesta.status_code in [200, 404]
     if respuesta.status_code == 200:
         assert respuesta.json["status"] == 200
