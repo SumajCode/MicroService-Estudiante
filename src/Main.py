@@ -6,10 +6,14 @@ from Infra.Routes.LoginRoutes import login
 from Infra.Routes.RegisterLoteRoute import registrarLote
 from Infra.Routes.PaisCiudadRoutes import paisCiudad
 from werkzeug.exceptions import HTTPException
-from flask_cors import CORS  
+from flask_cors import CORS 
+from flask_talisman import Talisman 
 
 app = Flask(__name__)
-CORS(app)
+app.url_map.strict_slashes = False 
+Talisman(app, content_security_policy=None)
+CORS(app, supports_credentials=True)
+
 
 app.config.from_object(Config)
 db.init_app(app)
