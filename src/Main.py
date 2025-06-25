@@ -6,8 +6,10 @@ from Infra.Routes.LoginRoutes import login
 from Infra.Routes.RegisterLoteRoute import registrarLote
 from Infra.Routes.PaisCiudadRoutes import paisCiudad
 from werkzeug.exceptions import HTTPException
+from flask_cors import CORS  
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_object(Config)
 db.init_app(app)
 # Registramos el Blueprint que contiene las rutas de estudiantes
