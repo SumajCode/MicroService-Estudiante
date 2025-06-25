@@ -12,8 +12,8 @@ from flask_talisman import Talisman
 app = Flask(__name__)
 
 # Configura CORS
-Talisman(app, content_security_policy=None)  # Desactiva CSP estricta por defecto
-CORS(app) 
+Talisman(app, content_security_policy=None)  # evita redirecciones 308 en preflight
+CORS(app, resources={r"/api/*": {"origins": "https://front-loginv1.vercel.app"}}, supports_credentials=True)
 app.config.from_object(Config)
 db.init_app(app)
 
