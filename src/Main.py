@@ -18,6 +18,7 @@ CORS(app, resources={
         "origins": [
             "http://localhost:3000",
             "https://microservice-estudiante.onrender.com",
+            "https://front-loginv1.vercel.app"
         ],
         "supports_credentials": True,
         "allow_headers": [
