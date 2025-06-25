@@ -6,7 +6,7 @@ from Infra.Routes.LoginRoutes import login
 from Infra.Routes.RegisterLoteRoute import registrarLote
 from Infra.Routes.PaisCiudadRoutes import paisCiudad
 from werkzeug.exceptions import HTTPException
-from flask_cors import CORS  
+from flask_cors import CORS, cross_origin 
 
 app = Flask(__name__)
 
