@@ -20,8 +20,7 @@ CORS(app,origins=
     ],
     supports_credentials=True,
     allow_headers=[
-        'Content-Type',
-        'Authorization'
+        'Content-Type'
     ])
 
 app.config.from_object(Config)
