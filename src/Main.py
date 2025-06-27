@@ -9,6 +9,7 @@ from werkzeug.exceptions import HTTPException
 from flask_cors import CORS 
 from flask_talisman import Talisman 
 
+
 app = Flask(__name__)
 app.url_map.strict_slashes = False 
 #Talisman(app, content_security_policy=None)
@@ -46,4 +47,5 @@ def handle_http_exception(e):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    if Config.ENV_DEV:
+        app.run(host=Config.HOST, port=Config.PORT_API)

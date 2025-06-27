@@ -24,4 +24,10 @@ class Config:
 
     # Configuración del correo con gmail
     EMAIL_REMITENTE = os.getenv("EMAIL_REMITENTE")
-    EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+    EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD") 
+
+
+    # Configuración para ejecucion local
+    HOST = os.getenv("HOST")
+    PORT_API = os.getenv("PORT_API")
+    ENV_DEV = os.getenv("ENV_DEV", "false").lower() == "true"

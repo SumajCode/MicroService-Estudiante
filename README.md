@@ -46,6 +46,13 @@ MYSQL_DATABASE=
 EMAIL_REMITENTE=micorreo@gmail.com
 EMAIL_PASSWORD=    # clave de aplicaccion de google / obtener de cuenta
 
+# --------------------------
+# Configuracion local
+# --------------------------
+ENV_DEV=true
+HOST=127.0.0.1
+PORT_API=4002
+
 ```
 
 ## Estructura del proyecto
@@ -96,6 +103,5 @@ https://drive.google.com/drive/folders/1GAPHdObHw9YRfPB5_gli7ShqyWY883Ws?usp=sha
 | /api/paises                    | GET          |
 | /api/ciudades/idpais           | GET          |
 -------------------------------------------------
-
 
 ```
