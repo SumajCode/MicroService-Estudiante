@@ -78,7 +78,24 @@ MicroServicioEstudiante/
 # Enlace o link de la api Microservicio estudiante
 https://microservice-estudiante.onrender.com
 
-# Documento de la API, en cual explica el uso de cada ruta e incle documentacion tecnica
+# Documento de la API, explica el uso de cada ruta e inclue documentacion tecnica
 https://drive.google.com/drive/folders/1GAPHdObHw9YRfPB5_gli7ShqyWY883Ws?usp=sharing
+
+# Endpoints de la api
+-------------------------------------------------
+| Endpoint                       |     Método   |
+|--------------------------------|--------------|
+| /api/estudiantes               | GET          |
+| /api/estudiantes/id            | GET          |
+| /api/estudiantes/registrar     | POST         |
+| /api/estudiantes/actualizar/id | PUT          |
+| /api/estudiantes/eliminar/id   | DELETE       |
+| /api/login                     | PUT          |
+| /api/login/cambiarContrasenia  | POST         |
+| /api/registrarLoteEstudiantes  | POST         |
+| /api/paises                    | GET          |
+| /api/ciudades/idpais           | GET          |
+-------------------------------------------------
+
 
 ```
