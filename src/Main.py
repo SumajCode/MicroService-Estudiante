@@ -11,9 +11,10 @@ from flask_talisman import Talisman
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False 
-Talisman(app, content_security_policy=None)
-CORS(app, supports_credentials=True)
+#Talisman(app, content_security_policy=None)
+Talisman(app, content_security_policy=None, force_https=False)
 
+CORS(app, supports_credentials=True)
 
 app.config.from_object(Config)
 db.init_app(app)

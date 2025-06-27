@@ -29,15 +29,22 @@ python main.py
 ```
 
 ## Configuracion de la base de datos
+🔹  Cree un archivo .env y copie las variables de entorno de abajo para la conexccon a la base de datos y para el envio de correos electronicos.
 ```bash
 # --------------------------
-# MySQL conexion con (Railway)
+# MySQL conexion con (Railway) o la base de datos que utilice
 # --------------------------
-MYSQLUSER=root
+MYSQLUSER= 
 MYSQLPASSWORD=
 MYSQLHOST=
 MYSQLPORT=
 MYSQL_DATABASE=
+
+# --------------------------
+# Para envio de correos
+# --------------------------
+EMAIL_REMITENTE=micorreo@gmail.com
+EMAIL_PASSWORD=    # clave de aplicaccion de google / obtener de cuenta
 
 ```
 
@@ -64,4 +71,14 @@ MicroServicioEstudiante/
 │   ├── Test/                   # Pruebas unitarias y de integración
 ├── requirements.txt            # Lista de dependencias del proyecto
 └── README.md                   # Documentación del microservicio
+```
+
+## Link del deploy del la Api
+```bash
+# Enlace o link de la api Microservicio estudiante
+https://microservice-estudiante.onrender.com
+
+# Documento de la API, en cual explica el uso de cada ruta e incle documentacion tecnica
+https://drive.google.com/drive/folders/1GAPHdObHw9YRfPB5_gli7ShqyWY883Ws?usp=sharing
+
 ```
